@@ -1,0 +1,24 @@
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  font-size: 16px ;
+  color: rgb(0, 0, 0);
+}
+
+.App{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.App-link {
+  color: #000000;
+}
+
+.corNome {
+  color: #e00000;
+}
+
