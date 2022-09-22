@@ -1,61 +1,26 @@
-import './App.css';
-import Evento from './Evento';
-import TipoIngresso from './TipoIngresso';
-import Contador from './Contador';
+import { useEffect, useState } from 'react'
+
+import { List } from './components/List'
 
 function App() {
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState([])
 
-  let name = 'anderson';
-  const data = '22/08';
-  const hr = '20:16';
-  let local = 'fag';
-  let cidade = 'cascavel';
-  const genero = 'Masculino';
+  useEffect(() => {
+    async function getData () {
+      setLoading(true)
+      const response = await fetch(' https://api.github.com/orgs/rocketseat/repos')
+      const res = await response.json()
+      setData(res)
+      setLoading(false)
+    }
 
-  let camaroteOpen = 'CamaroteOpen : $';
-  const camarote = 'Camarote : $';
-  const FrontStage = 'Front-Stage : $';
-  let pista = 'Pista : $';
-
-  let camaroteOpenPreco = 150;
-  let camarotePreco = 100;
-  let FrontStagePreco = 60;
-  let pistaPreco = 30;
-
+    getData()
+  }, [])
 
   return (
     <div className="App">
-      <header className="App-header">
-       <h1>Anderson da Rocha Ritter</h1>
-      </header>
-      
-        <Evento 
-         name={name}
-         dia={data}
-         hr={hr}
-         local={local}
-         cidade={cidade}
-         genero={genero}
-         /> 
-
-         <h1>Ingressos</h1>
-
-        <TipoIngresso 
-         camaroteOpen={camaroteOpen}
-         camarote={camarote}
-         FrontStage={FrontStage}
-         pista={pista}
-        
-         preco1={camaroteOpenPreco}
-         preco2={camarotePreco}
-         preco3={FrontStagePreco}
-         preco4={pistaPreco}
-         /> 
-    
-        <h1>CONTADOR</h1>
-        
-        <Contador/>
-
+      {loading ? <h1>CARREGANDO....</h1> : <List data={data} />}
     </div>
   );
 }
